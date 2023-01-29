@@ -6,8 +6,6 @@ import ExerciseCard from "./ExerciseCard";
 import { exerciseOptions, fetchData } from "../utils/fetchData";
 
 const Exercises = ({ exercises, setExercises, bodyPart }) => {
-  console.log("searched for exercises", "data from SearchExercises", exercises);
-
   const [currentPage, setCurrentPage] = useState(1);
   const exercisesPerPage = 9;
 
@@ -30,7 +28,7 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
 
       if (bodyPart === "all") {
         exercisesData = await fetchData(
-          "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
+          "https://exercisedb.p.rapidapi.com/exercises",
           exerciseOptions
         );
       } else {
@@ -39,10 +37,12 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
           exerciseOptions
         );
       }
+
+      setExercises(exercisesData);
     };
 
     fetchExercisesData();
-  });
+  }, [bodyPart, setExercises]);
 
   return (
     <Box id="exercises" sx={{ mt: { lg: "110px" } }} mt="50px" p="20px">
@@ -55,13 +55,9 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
         flexWrap="wrap"
         justifyContent="center"
       >
-        {exercises.map((exercise, index) => (
-          <ExerciseCard key={index} exercise={exercise} />
-        ))}
-        {/* 
         {currentExercises.map((exercise, index) => (
           <ExerciseCard key={index} exercise={exercise} />
-        ))} */}
+        ))}
       </Stack>
       <Stack mt="100px" alignItems="center">
         {exercises.length > 9 && (
