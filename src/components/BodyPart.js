@@ -7,6 +7,7 @@ const BodyPart = ({ item, setBodyPart, bodyPart }) => {
     <Stack
       type="button"
       alignItems="center"
+      justifyContent="center"
       className="bodyPart-card"
       sx={{
         borderTop: bodyPart === item ? "4px solid #ff2625" : "",
@@ -16,6 +17,10 @@ const BodyPart = ({ item, setBodyPart, bodyPart }) => {
         height: "280px",
         cursor: "pointer",
         gap: "47px",
+      }}
+      onClick={() => {
+        setBodyPart(item);
+        window.scrollTo({ top: 1800, left: 100, behavior: "smooth" });
       }}
     >
       <img
